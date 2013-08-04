@@ -21,15 +21,28 @@ namespace FreeWatermarker
 
             if (images == null)
             {
-                MessageBox.Show("There is no images to save!", "What images?", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                this.Close();
+                impossibleToSave();
             }
+            if (images.Count <= 0)
+            {
+                impossibleToSave();
+            }
+        }
+
+        private void impossibleToSave()
+        {
+            MessageBox.Show("There is no images to save!", "What images?", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            this.btnSave.Enabled = false;
+            this.rbReplace.Enabled = false;
+            this.rbReplace.Checked = false;
+            this.rbKeep.Enabled = false;
+            this.rbKeep.Checked = false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             int ret = prepareToSave();
-            MessageBox.Show(ret.ToString() + " de " + images.Count.ToString() + " foram salvas!", "Finish!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show(ret.ToString() + " of " + images.Count.ToString() + " images was saved!", "Finish!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private int prepareToSave()
@@ -84,7 +97,7 @@ namespace FreeWatermarker
             string fileName;
             int count = 1;
             
-            foreach (clsImageItem iten in images)
+            foreach (clsImageItem item in images)
             {
                 if (folder != "")
                 {
@@ -92,30 +105,31 @@ namespace FreeWatermarker
                     {
                         folder += "\\";
                     }
-                    if (seqName != "")
-                    {
-                        fileName = seqName + "_" + count.ToString() + iten.FileExtension();
-                    }
-                    else
-                    {
-                        fileName = iten.FileName();
-                    }
-                    try
-                    {
-                        if (File.Exists(folder + fileName))
-                        {
-                            File.Delete(folder + fileName);
-                        }
-                        clsWaterMark.insertWaterMark(iten.Image).Save(folder + fileName);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Erro saving file.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+
+                }
+                if (seqName != "")
+                {
+                    fileName = seqName + "_" + count.ToString() + item.FileExtension();
+                }
+                else if(folder == "")
+                {
+                    fileName = item.Url;
                 }
                 else
                 {
-                    //clsWaterMark.insertWaterMark(iten.Image).Save();
+                    fileName = item.FileName();
+                }
+                try
+                {
+                    if (File.Exists(folder + fileName))
+                    {
+                        File.Delete(folder + fileName);
+                    }
+                    clsWaterMark.insertWaterMark(item.Image).Save(folder + fileName);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Erro saving file.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 count++;
             }

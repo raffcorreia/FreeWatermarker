@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace FreeWatermarker
 {
@@ -29,7 +30,9 @@ namespace FreeWatermarker
             try
             {
                 _url = url;
-                _image = new Bitmap(url);
+                FileStream fs = new FileStream(_url, FileMode.Open);
+                _image = new Bitmap(fs);
+                fs.Close();
             }
             catch (Exception)
             {

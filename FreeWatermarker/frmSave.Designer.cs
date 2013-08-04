@@ -197,7 +197,6 @@
             // rbReplace
             // 
             this.rbReplace.AutoSize = true;
-            this.rbReplace.Enabled = false;
             this.rbReplace.Location = new System.Drawing.Point(10, 10);
             this.rbReplace.Name = "rbReplace";
             this.rbReplace.Size = new System.Drawing.Size(122, 17);
