@@ -61,7 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clsListViewImage.cs" />
+    <Compile Include="clsImageItem.cs" />
+    <Compile Include="clsWaterMark.cs" />
+    <Compile Include="frmPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPreview.Designer.cs">
+      <DependentUpon>frmPreview.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmWatermark.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +83,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmPreview.resx">
+      <DependentUpon>frmPreview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmWatermark.resx">
       <DependentUpon>frmWatermark.cs</DependentUpon>
     </EmbeddedResource>

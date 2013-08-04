@@ -12,171 +12,233 @@ namespace FreeWatermarker
 {
     public partial class frmWatermark : Form
     {
+        public List<clsImageItem> images;
+        int previusSelected;
+
         public frmWatermark()
         {
             InitializeComponent();
 
-            loadImages();
+            images = new List<clsImageItem>();
+
+            previusSelected = -1;
+
+            loadImages(new string[] { "..\\..\\..\\..\\1.jpg", "..\\..\\..\\..\\2.jpg", "..\\..\\..\\..\\3.jpg", "..\\..\\..\\..\\4.jpg" });
+            LoadWaterMark("..\\..\\Images\\watermark.bmp");
+
+            this.pbWatermark.AllowDrop = true;
+            this.pbWatermark.DragEnter += new System.Windows.Forms.DragEventHandler(this.pbWatermark_DragEnter);
+            this.pbWatermark.DragLeave += new System.EventHandler(this.pbWatermark_DragLeave);
         }
 
-        private void loadImages()
+        private void loadImages(string[] files)
         {
-            //Put one image no the tab
-            ImageList il = new ImageList();
-            IContainer ic = new Container();
-            il.Images.Add(Properties.Resources.save);
-            tabControl1.ImageList = il;
-            tabPage1.ImageIndex = 0;
-            //-----------------------------------------
-            
-            lvImages.AllowColumnReorder = true;
-            lvImages.FullRowSelect = true;
-
-            // Create three items and three sets of subitems for each item.
-            clsListViewImage item1 = new clsListViewImage("item1", 0, "ah ha!");
-            item1.Text = "Text 1";
-            item1.ImageIndex = 0;
-            item1.Teste = "Ha! Ha! Ha! 2.0";
-            //---
-            clsListViewImage item2 = new clsListViewImage("item2", 0, "ah ha2!");
-            item2.Text = "Text 2";
-            item2.ImageIndex = 1;
-            item2.Teste = "TESTE www";
-            //---
-            clsListViewImage item3 = new clsListViewImage("item3", 0, "ah ha3!");
-            item3.Text = "Text 3";
-            item3.ImageIndex = 2;
-            item3.Teste = "TESTE qqq";
-            //---
-            clsListViewImage item4 = new clsListViewImage("item4", 0, "ah ha4!");
-            item4.Text = "Text 4";
-            item4.ImageIndex = 3;
-            item4.Teste = "TESTE xxx";
-            //--
-
-            lvImages.Items.AddRange(new ListViewItem[] { item1, item2, item3, item4 });
-            
-            ImageList imageListLarge = new ImageList();
-            imageListLarge.ImageSize = new Size(75, 75);
-
-            item1.ImagemOriginal = new Bitmap("..\\..\\..\\..\\1.jpg");
-            item2.ImagemOriginal = new Bitmap("..\\..\\..\\..\\2.jpg");
-            item3.ImagemOriginal = new Bitmap("..\\..\\..\\..\\3.jpg");
-            item4.ImagemOriginal = new Bitmap("..\\..\\..\\..\\4.jpg");
-
-            imageListLarge.Images.Add(item1.ImagemOriginal);
-            imageListLarge.Images.Add(item2.ImagemOriginal);
-            imageListLarge.Images.Add(item3.ImagemOriginal);
-            imageListLarge.Images.Add(item4.ImagemOriginal);
-
-            /*
-            imageListLarge.Images.Add(Bitmap.FromFile("..\\..\\..\\..\\1.jpg"));
-            imageListLarge.Images.Add(Bitmap.FromFile("..\\..\\..\\..\\2.jpg"));
-            imageListLarge.Images.Add(Bitmap.FromFile("..\\..\\..\\..\\3.jpg"));
-            imageListLarge.Images.Add(Bitmap.FromFile("..\\..\\..\\..\\4.jpg"));
-            */
-            lvImages.LargeImageList = imageListLarge;
-
-            insertWaterMark();
-        }
-
-        private void insertWaterMark()
-        {
-            Bitmap w = new Bitmap("..\\..\\..\\..\\Watermark.bmp");
-            Bitmap img = new Bitmap("..\\..\\..\\..\\1.jpg");
-            int x, y, r, g, b;
-            uint teste = 4294506744;// 4294967295;// ;//16316664;
-            int transparente = (int)teste;//4294967295;
-            float a;
-            a = 0.5f;
-
-            for (y = 0; y < w.Height; y++)
+            if (files != null)
             {
-                for (x = 0; x < w.Width; x++)
+                int index;
+                gridImages.Enabled = false;
+
+                foreach (string file in files)
                 {
-                    
-                    //if (!((w.GetPixel(x, y).ToArgb() > Color.FromArgb(240, 240, 240).ToArgb()) && (w.GetPixel(x, y).ToArgb() < Color.FromArgb(255, 255, 255).ToArgb())))
-                    if (w.GetPixel(x, y).ToArgb() < transparente)
+                    try
                     {
-                        r = (int)((1 - a) * img.GetPixel(x + 30, y + 120).R + a * w.GetPixel(x, y).R);
-                        g = (int)((1 - a) * img.GetPixel(x + 30, y + 120).G + a * w.GetPixel(x, y).G);
-                        b = (int)((1 - a) * img.GetPixel(x + 30, y + 120).B + a * w.GetPixel(x, y).B);
-                        img.SetPixel(x+30, y+120, Color.FromArgb(r, g, b));   
+                        index = images.Count;
+                    
+                        images.Add(new clsImageItem(file));
+
+                        gridImages.Rows.Add();
+                        gridImages.Rows[index].Height = 100;
+                        gridImages.Rows[index].Cells[0].Value = images[index].ResizeToFill(95);
+                        gridImages.Rows[index].Cells[1].Value = images[index].Description();
+                        gridImages.Enabled = true;                        	
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("There is a problem reading this image: " + file, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                gridImages.Enabled = true;
+                gridImages.AutoResizeColumn(1);
             }
-            pbImage.Image = img;
         }
 
-        private void btnAbrir_Click(object sender, EventArgs e)
+        private void btnOpenImages_Click(object sender, EventArgs e)
         {
-            System.IO.Stream myStream = null;
             OpenFileDialog ofdOpen = new OpenFileDialog();
-            ofdOpen.Filter = "Imagens|*.bmp;*.jpg;*.png|Imagens Bitmap|*.bmp|Imagens jpg|*.jpg|Imagens png|*.png"; 
-            //ofdOpen.ShowDialog();
+            ofdOpen.Filter = "Imagens|*.bmp;*.jpg;*.png|Imagens Bitmap|*.bmp|Imagens jpg|*.jpg|Imagens png|*.png";
+            ofdOpen.Multiselect = true;
+            ofdOpen.Title = "Open original images";
 
             if (ofdOpen.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    if ((myStream = ofdOpen.OpenFile()) != null)
-                    {
-                        using (myStream)
-                        {
-                            // Insert code to read the stream here.
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro: Não foi possível ler os arquivos do disco: " + ex.Message);
-                }
+                loadImages(ofdOpen.FileNames);
             }
-
-
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnSaveImages_Click(object sender, EventArgs e)
         {
-            frmSave f = new frmSave();
+            frmSave f = new frmSave(ref images);
             f.ShowDialog();
-        }
-
-        private void lvImages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //lvImages.SelectedItems[0].ImageIndex
-            if (lvImages.SelectedItems.Count > 0)
-            {
-                //pbImage.Image = lvImages.LargeImageList.Images[lvImages.SelectedItems[0].ImageIndex];
-                pbImage.Image = ((clsListViewImage)lvImages.SelectedItems[0]).ImagemOriginal;
-                this.Text = ((clsListViewImage)lvImages.SelectedItems[0]).Teste;
-            }
-        }
-
-        private void lvImages_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                cmsMenu.Show(lvImages, e.X, e.Y);
-            }
+            f.Dispose();
         }
 
         private void selecionarTodasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach(ListViewItem i in lvImages.Items)
-            {
-                i.Selected = true;
-                i.Checked = true;
-            }
+                gridImages.SelectAll();
         }
 
         private void limparSeleçãoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem i in lvImages.Items)
+            gridImages.ClearSelection();
+        }
+
+        private void pbImage_MouseEnter(object sender, EventArgs e)
+        {
+            lblStatus.Text = "Double click to preview in full screen";
+        }
+
+        private void pbImage_MouseLeave(object sender, EventArgs e)
+        {
+            lblStatus.Text = "";
+        }
+
+        private void pbImage_DoubleClick(object sender, EventArgs e)
+        {
+            frmPreview f = new frmPreview(pbImage.Image);
+            f.ShowDialog(this);
+            f.Dispose();
+        }
+
+        private void frmWatermark_DragLeave(object sender, EventArgs e)
+        {
+            pbWatermark.BorderStyle = BorderStyle.FixedSingle;
+            gridImages.BorderStyle = BorderStyle.None;
+        }
+
+        private void frmWatermark_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+            pbWatermark.BorderStyle = BorderStyle.FixedSingle;
+            gridImages.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void pbWatermark_DragLeave(object sender, EventArgs e)
+        {
+            pbWatermark.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void pbWatermark_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+            pbWatermark.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void gridImages_SelectionChanged(object sender, EventArgs e)
+        {
+            if (gridImages.SelectedCells.Count > 0)
             {
-                i.Selected = false;
-                i.Checked = false;
+                SelectImage(gridImages.SelectedCells[0].RowIndex);
             }
+            else
+            {
+                SelectImage(-1);
+            }
+        }
+
+        private void SelectImage(int index)
+        {
+            if (index < 0 || images.Count == 0)
+            {
+                pbImage.Image = null;
+            }
+            else
+            {
+                if (index != previusSelected)
+                {
+                        pbImage.Image = clsWaterMark.insertWaterMark(images[index].Image);
+                }
+            }
+        }
+
+        private void gridImages_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (!deleteImage(e.Row.Index))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private bool deleteImage(int index)
+        {
+            try
+            {
+                images.RemoveAt(index);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private void gridImages_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                cmsMenu.Show(gridImages, e.X, e.Y);
+            }
+        }
+
+        private void removeSelectedImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in gridImages.SelectedRows)
+            {
+                deleteImage(r.Index);
+                gridImages.Rows.Remove(r);
+            }
+        }
+
+        private void btnOpenWaterMark_Click(object sender, EventArgs e)
+        {
+            OpeWaterMark();
+        }
+
+        private void pbWatermark_DoubleClick(object sender, EventArgs e)
+        {
+            OpeWaterMark();
+        }
+
+        private void OpeWaterMark()
+        {
+            OpenFileDialog ofdOpen = new OpenFileDialog();
+            ofdOpen.Filter = "Imagens|*.bmp;*.jpg;*.png|Imagens Bitmap|*.bmp|Imagens jpg|*.jpg|Imagens png|*.png";
+            ofdOpen.Multiselect = false;
+            ofdOpen.Title = "Open Watermark";
+
+            if (ofdOpen.ShowDialog() == DialogResult.OK)
+            {
+                LoadWaterMark(ofdOpen.FileName);
+            }
+        }
+
+        private void LoadWaterMark(string FileName)
+        {
+            try
+            {
+                clsWaterMark.WaterMark = new Bitmap(FileName);
+                pbWatermark.Image = clsWaterMark.WaterMark;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There is a problem reading the watermark image: " + FileName, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnViewWaterMark_Click(object sender, EventArgs e)
+        {
+            frmPreview f = new frmPreview(clsWaterMark.WaterMark);
+            f.ShowDialog(this);
+            f.Dispose();
         }
     }
 }
