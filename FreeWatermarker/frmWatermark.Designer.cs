@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWatermark));
             this.pBar = new System.Windows.Forms.ProgressBar();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gridImages = new System.Windows.Forms.DataGridView();
             this.ColumnImg = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnAbout = new System.Windows.Forms.Button();
             this.nudOffSetY = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.nudTransparency = new System.Windows.Forms.NumericUpDown();
@@ -54,12 +56,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblWMTransparentColor = new System.Windows.Forms.Label();
             this.btnSelectColor = new System.Windows.Forms.Button();
+            this.btnOpenWaterMark = new System.Windows.Forms.Button();
+            this.btnViewWaterMark = new System.Windows.Forms.Button();
+            this.pbWatermark = new System.Windows.Forms.PictureBox();
+            this.btnSaveImages = new System.Windows.Forms.Button();
+            this.btnOpenImages = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ssStatus = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -72,13 +80,6 @@
             this.cmsTransparentColor = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmSelectColor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmRemoveColor = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAbout = new System.Windows.Forms.Button();
-            this.btnOpenWaterMark = new System.Windows.Forms.Button();
-            this.btnViewWaterMark = new System.Windows.Forms.Button();
-            this.pbWatermark = new System.Windows.Forms.PictureBox();
-            this.btnSaveImages = new System.Windows.Forms.Button();
-            this.btnOpenImages = new System.Windows.Forms.Button();
-            this.pbImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -92,15 +93,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudTransparency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffSetX)).BeginInit();
             this.panelPosition.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWatermark)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.ssStatus.SuspendLayout();
             this.cmsImages.SuspendLayout();
             this.cmsTransparentColor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbWatermark)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
             // pBar
@@ -211,6 +212,17 @@
             this.splitContainer2.Size = new System.Drawing.Size(468, 428);
             this.splitContainer2.SplitterDistance = 150;
             this.splitContainer2.TabIndex = 2;
+            // 
+            // btnAbout
+            // 
+            this.btnAbout.BackgroundImage = global::FreeWatermarker.Properties.Resources.Info32x32;
+            this.btnAbout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAbout.Location = new System.Drawing.Point(3, 118);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(30, 30);
+            this.btnAbout.TabIndex = 20;
+            this.btnAbout.UseVisualStyleBackColor = true;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
             // nudOffSetY
             // 
@@ -412,7 +424,7 @@
             // btnSelectColor
             // 
             this.btnSelectColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectColor.BackgroundImage = global::FreeWatermarker.Properties.Resources.picket;
+            this.btnSelectColor.BackgroundImage = global::FreeWatermarker.Properties.Resources.ColorPicker32x32;
             this.btnSelectColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSelectColor.Location = new System.Drawing.Point(295, 118);
             this.btnSelectColor.Name = "btnSelectColor";
@@ -420,6 +432,64 @@
             this.btnSelectColor.TabIndex = 11;
             this.btnSelectColor.UseVisualStyleBackColor = true;
             this.btnSelectColor.Visible = false;
+            // 
+            // btnOpenWaterMark
+            // 
+            this.btnOpenWaterMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenWaterMark.BackgroundImage = global::FreeWatermarker.Properties.Resources.Open32x32;
+            this.btnOpenWaterMark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOpenWaterMark.Location = new System.Drawing.Point(436, 118);
+            this.btnOpenWaterMark.Name = "btnOpenWaterMark";
+            this.btnOpenWaterMark.Size = new System.Drawing.Size(30, 30);
+            this.btnOpenWaterMark.TabIndex = 9;
+            this.btnOpenWaterMark.UseVisualStyleBackColor = true;
+            this.btnOpenWaterMark.Click += new System.EventHandler(this.btnOpenWaterMark_Click);
+            // 
+            // btnViewWaterMark
+            // 
+            this.btnViewWaterMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewWaterMark.BackgroundImage = global::FreeWatermarker.Properties.Resources.Preview32x32;
+            this.btnViewWaterMark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnViewWaterMark.Location = new System.Drawing.Point(398, 118);
+            this.btnViewWaterMark.Name = "btnViewWaterMark";
+            this.btnViewWaterMark.Size = new System.Drawing.Size(30, 30);
+            this.btnViewWaterMark.TabIndex = 8;
+            this.btnViewWaterMark.UseVisualStyleBackColor = true;
+            this.btnViewWaterMark.Click += new System.EventHandler(this.btnViewWaterMark_Click);
+            // 
+            // pbWatermark
+            // 
+            this.pbWatermark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbWatermark.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbWatermark.Location = new System.Drawing.Point(265, 3);
+            this.pbWatermark.Name = "pbWatermark";
+            this.pbWatermark.Size = new System.Drawing.Size(200, 115);
+            this.pbWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbWatermark.TabIndex = 7;
+            this.pbWatermark.TabStop = false;
+            this.pbWatermark.DoubleClick += new System.EventHandler(this.pbWatermark_DoubleClick);
+            // 
+            // btnSaveImages
+            // 
+            this.btnSaveImages.BackgroundImage = global::FreeWatermarker.Properties.Resources.Save32x32;
+            this.btnSaveImages.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSaveImages.Location = new System.Drawing.Point(3, 38);
+            this.btnSaveImages.Name = "btnSaveImages";
+            this.btnSaveImages.Size = new System.Drawing.Size(30, 30);
+            this.btnSaveImages.TabIndex = 5;
+            this.btnSaveImages.UseVisualStyleBackColor = true;
+            this.btnSaveImages.Click += new System.EventHandler(this.btnSaveImages_Click);
+            // 
+            // btnOpenImages
+            // 
+            this.btnOpenImages.BackgroundImage = global::FreeWatermarker.Properties.Resources.Open32x32;
+            this.btnOpenImages.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOpenImages.Location = new System.Drawing.Point(2, 2);
+            this.btnOpenImages.Name = "btnOpenImages";
+            this.btnOpenImages.Size = new System.Drawing.Size(30, 30);
+            this.btnOpenImages.TabIndex = 4;
+            this.btnOpenImages.UseVisualStyleBackColor = true;
+            this.btnOpenImages.Click += new System.EventHandler(this.btnOpenImages_Click);
             // 
             // tabControl1
             // 
@@ -477,6 +547,20 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pbImage
+            // 
+            this.pbImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbImage.Location = new System.Drawing.Point(0, 0);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(466, 272);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbImage.TabIndex = 0;
+            this.pbImage.TabStop = false;
+            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
+            this.pbImage.DoubleClick += new System.EventHandler(this.pbImage_DoubleClick);
+            this.pbImage.MouseEnter += new System.EventHandler(this.pbImage_MouseEnter);
+            this.pbImage.MouseLeave += new System.EventHandler(this.pbImage_MouseLeave);
             // 
             // ssStatus
             // 
@@ -561,89 +645,6 @@
             this.tsmRemoveColor.Text = "Remove Color";
             this.tsmRemoveColor.Click += new System.EventHandler(this.tsmRemoveColor_Click);
             // 
-            // btnAbout
-            // 
-            this.btnAbout.BackgroundImage = global::FreeWatermarker.Properties.Resources.info;
-            this.btnAbout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAbout.Location = new System.Drawing.Point(3, 118);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(30, 30);
-            this.btnAbout.TabIndex = 20;
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
-            // btnOpenWaterMark
-            // 
-            this.btnOpenWaterMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenWaterMark.BackgroundImage = global::FreeWatermarker.Properties.Resources.imagesCAWN35C4;
-            this.btnOpenWaterMark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnOpenWaterMark.Location = new System.Drawing.Point(436, 118);
-            this.btnOpenWaterMark.Name = "btnOpenWaterMark";
-            this.btnOpenWaterMark.Size = new System.Drawing.Size(30, 30);
-            this.btnOpenWaterMark.TabIndex = 9;
-            this.btnOpenWaterMark.UseVisualStyleBackColor = true;
-            this.btnOpenWaterMark.Click += new System.EventHandler(this.btnOpenWaterMark_Click);
-            // 
-            // btnViewWaterMark
-            // 
-            this.btnViewWaterMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewWaterMark.BackgroundImage = global::FreeWatermarker.Properties.Resources.search;
-            this.btnViewWaterMark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnViewWaterMark.Location = new System.Drawing.Point(398, 118);
-            this.btnViewWaterMark.Name = "btnViewWaterMark";
-            this.btnViewWaterMark.Size = new System.Drawing.Size(30, 30);
-            this.btnViewWaterMark.TabIndex = 8;
-            this.btnViewWaterMark.UseVisualStyleBackColor = true;
-            this.btnViewWaterMark.Click += new System.EventHandler(this.btnViewWaterMark_Click);
-            // 
-            // pbWatermark
-            // 
-            this.pbWatermark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbWatermark.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbWatermark.Location = new System.Drawing.Point(265, 3);
-            this.pbWatermark.Name = "pbWatermark";
-            this.pbWatermark.Size = new System.Drawing.Size(200, 115);
-            this.pbWatermark.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbWatermark.TabIndex = 7;
-            this.pbWatermark.TabStop = false;
-            this.pbWatermark.DoubleClick += new System.EventHandler(this.pbWatermark_DoubleClick);
-            // 
-            // btnSaveImages
-            // 
-            this.btnSaveImages.BackgroundImage = global::FreeWatermarker.Properties.Resources.save;
-            this.btnSaveImages.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSaveImages.Location = new System.Drawing.Point(3, 38);
-            this.btnSaveImages.Name = "btnSaveImages";
-            this.btnSaveImages.Size = new System.Drawing.Size(30, 30);
-            this.btnSaveImages.TabIndex = 5;
-            this.btnSaveImages.UseVisualStyleBackColor = true;
-            this.btnSaveImages.Click += new System.EventHandler(this.btnSaveImages_Click);
-            // 
-            // btnOpenImages
-            // 
-            this.btnOpenImages.BackgroundImage = global::FreeWatermarker.Properties.Resources.imagesCAWN35C4;
-            this.btnOpenImages.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnOpenImages.Location = new System.Drawing.Point(2, 2);
-            this.btnOpenImages.Name = "btnOpenImages";
-            this.btnOpenImages.Size = new System.Drawing.Size(30, 30);
-            this.btnOpenImages.TabIndex = 4;
-            this.btnOpenImages.UseVisualStyleBackColor = true;
-            this.btnOpenImages.Click += new System.EventHandler(this.btnOpenImages_Click);
-            // 
-            // pbImage
-            // 
-            this.pbImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbImage.Location = new System.Drawing.Point(0, 0);
-            this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(466, 272);
-            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbImage.TabIndex = 0;
-            this.pbImage.TabStop = false;
-            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
-            this.pbImage.DoubleClick += new System.EventHandler(this.pbImage_DoubleClick);
-            this.pbImage.MouseEnter += new System.EventHandler(this.pbImage_MouseEnter);
-            this.pbImage.MouseLeave += new System.EventHandler(this.pbImage_MouseLeave);
-            // 
             // frmWatermark
             // 
             this.AllowDrop = true;
@@ -654,6 +655,7 @@
             this.Controls.Add(this.pBar);
             this.Controls.Add(this.ssStatus);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(570, 360);
             this.Name = "frmWatermark";
             this.Text = "Free Watermarker";
@@ -673,17 +675,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudTransparency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffSetX)).EndInit();
             this.panelPosition.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbWatermark)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ssStatus.ResumeLayout(false);
             this.ssStatus.PerformLayout();
             this.cmsImages.ResumeLayout(false);
             this.cmsTransparentColor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbWatermark)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

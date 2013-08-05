@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSave));
             this.label1 = new System.Windows.Forms.Label();
             this.chkChangeNames = new System.Windows.Forms.CheckBox();
             this.txtSeqName = new System.Windows.Forms.TextBox();
@@ -141,7 +142,6 @@
             // 
             // btnSave
             // 
-            this.btnSave.BackgroundImage = global::FreeWatermarker.Properties.Resources.save;
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSave.Location = new System.Drawing.Point(351, 308);
             this.btnSave.Name = "btnSave";
@@ -152,7 +152,6 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.BackgroundImage = global::FreeWatermarker.Properties.Resources.imagesCA2B2D53;
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(309, 308);
@@ -231,7 +230,8 @@
             this.Controls.Add(this.gpbKeep);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
