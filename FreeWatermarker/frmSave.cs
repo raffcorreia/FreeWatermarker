@@ -12,11 +12,14 @@ namespace FreeWatermarker
 {
     public partial class frmSave : Form
     {
-        List<clsImageItem> images;
+        public clsWaterMark WaterMark;
+        public List<clsImageItem> images;
 
-        public frmSave(ref List<clsImageItem> imageList)
+        public frmSave(ref List<clsImageItem> imageList, clsWaterMark WMark)
         {
             InitializeComponent();
+
+            WaterMark = WMark;
             images = imageList;
 
             if (images == null)
@@ -125,7 +128,7 @@ namespace FreeWatermarker
                     {
                         File.Delete(folder + fileName);
                     }
-                    clsWaterMark.insertWaterMark(item.Image).Save(folder + fileName);
+                    WaterMark.insertWaterMark(item).Save(folder + fileName);
                 }
                 catch (Exception)
                 {

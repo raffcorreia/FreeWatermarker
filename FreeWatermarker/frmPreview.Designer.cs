@@ -49,6 +49,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 313);
             this.Controls.Add(this.pbImage);
+            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "frmPreview";
             this.Text = "Preview Image [press ESC to close]";

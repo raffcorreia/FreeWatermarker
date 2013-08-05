@@ -25,6 +25,50 @@ namespace FreeWatermarker
             set { _url = value; }
         }
 
+        private bool _WMHasTransparency;
+        public bool WMHasTransparency
+        {
+            get { return _WMHasTransparency; }
+            set { _WMHasTransparency = value; }
+        }
+
+        private Color _WMTransparentColor;
+        public Color WMTransparentColor
+        {
+            get { return _WMTransparentColor; }
+            set { _WMTransparentColor = value; }
+        }
+
+        private ContentAlignment _WMAlignment;
+        public ContentAlignment WMAlignment
+        {
+            get { return _WMAlignment; }
+            set { _WMAlignment = value; }
+        }
+
+        private int _WMTransparency;
+        public int WMTransparency
+        {
+            get { return _WMTransparency; }
+            set { _WMTransparency = value; }
+        }
+
+        private int _WMHashCode;
+        public int WMHashCode
+        {
+            get { return _WMHashCode; }
+            set { _WMHashCode = value; }
+        }
+
+        private Bitmap _imgWMCut;
+        public Bitmap ImgWMCut
+        {
+            get { return _imgWMCut; }
+            set { _imgWMCut = value; }
+        }
+
+        public Size WMOffSet;
+            
         public clsImageItem(string url)
         {
             try

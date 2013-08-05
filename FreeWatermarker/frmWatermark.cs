@@ -6,12 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-//using System.Resources;
 
 namespace FreeWatermarker
 {
     public partial class frmWatermark : Form
     {
+        clsWaterMark WaterMark;
         public List<clsImageItem> images;
         int previusSelected;
 
@@ -19,11 +19,17 @@ namespace FreeWatermarker
         {
             InitializeComponent();
 
+            WaterMark = new clsWaterMark();
             images = new List<clsImageItem>();
 
             previusSelected = -1;
+            WaterMark.HasTransparentColor = true;
+            WaterMark.TransparentColor = Color.White;
+            WaterMark.Alignment = ContentAlignment.MiddleCenter;
+            checkBox5.Checked = true;
+            nudTransparency.Value = 50;
 
-            loadImages(new string[] { "..\\..\\..\\..\\1.jpg", "..\\..\\..\\..\\2.jpg", "..\\..\\..\\..\\3.jpg", "..\\..\\..\\..\\4.jpg" });
+            //loadImages(new string[] { "..\\..\\..\\..\\1.jpg", "..\\..\\..\\..\\2.jpg", "..\\..\\..\\..\\3.jpg", "..\\..\\..\\..\\4.jpg" });
             LoadWaterMark("..\\..\\Images\\watermark.bmp");
 
             this.pbWatermark.AllowDrop = true;
@@ -77,7 +83,7 @@ namespace FreeWatermarker
 
         private void btnSaveImages_Click(object sender, EventArgs e)
         {
-            frmSave f = new frmSave(ref images);
+            frmSave f = new frmSave(ref images, WaterMark);
             f.ShowDialog();
             f.Dispose();
         }
@@ -135,6 +141,11 @@ namespace FreeWatermarker
 
         private void gridImages_SelectionChanged(object sender, EventArgs e)
         {
+            SelectImageFromGrid();
+        }
+
+        private void SelectImageFromGrid()
+        {
             if (gridImages.SelectedCells.Count > 0)
             {
                 SelectImage(gridImages.SelectedCells[0].RowIndex);
@@ -142,7 +153,7 @@ namespace FreeWatermarker
             else
             {
                 SelectImage(-1);
-            }
+            }        
         }
 
         private void SelectImage(int index)
@@ -155,7 +166,7 @@ namespace FreeWatermarker
             {
                 if (index != previusSelected)
                 {
-                        pbImage.Image = clsWaterMark.insertWaterMark(images[index].Image);
+                    pbImage.Image = WaterMark.insertWaterMark(images[index]);
                 }
             }
         }
@@ -185,7 +196,7 @@ namespace FreeWatermarker
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                cmsMenu.Show(gridImages, e.X, e.Y);
+                cmsImages.Show(gridImages, e.X, e.Y);
             }
         }
 
@@ -225,8 +236,8 @@ namespace FreeWatermarker
         {
             try
             {
-                clsWaterMark.WaterMark = new Bitmap(FileName);
-                pbWatermark.Image = clsWaterMark.WaterMark;
+                WaterMark.ImgWaterMark = new Bitmap(FileName);
+                pbWatermark.Image = WaterMark.ImgWaterMark;
             }
             catch (Exception)
             {
@@ -236,9 +247,87 @@ namespace FreeWatermarker
 
         private void btnViewWaterMark_Click(object sender, EventArgs e)
         {
-            frmPreview f = new frmPreview(clsWaterMark.WaterMark);
+            frmPreview f = new frmPreview(WaterMark.ImgWaterMark);
             f.ShowDialog(this);
             f.Dispose();
+        }
+
+        private void SelectWMTransparentColor()
+        {           
+            ColorDialog cdSelectColor = new System.Windows.Forms.ColorDialog();
+            DialogResult res = cdSelectColor.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                WaterMark.HasTransparentColor = true;
+                WaterMark.TransparentColor = cdSelectColor.Color;
+                lblWMTransparentColor.BackColor = cdSelectColor.Color;
+                SelectImageFromGrid();
+            }
+        }
+
+        private void lblWMTransparentColor_MouseDown(object sender, MouseEventArgs e)
+        {
+            cmsTransparentColor.Show(lblWMTransparentColor, e.X, e.Y);
+        }
+
+        private void tsmSelectColor_Click(object sender, EventArgs e)
+        {
+            SelectWMTransparentColor();
+        }
+
+        private void tsmRemoveColor_Click(object sender, EventArgs e)
+        {
+            WaterMark.HasTransparentColor = false;
+            lblWMTransparentColor.BackColor = SystemColors.InactiveCaption;
+            lblWMTransparentColor.Text = "N";
+            SelectImageFromGrid();
+        }
+
+        private void checkBoxPosition_Click(object sender, EventArgs e)
+        {
+            foreach (object obj in panelPosition.Controls)
+            {
+                if (obj.GetType() == typeof(CheckBox))
+                {
+                    CheckBox ck = (CheckBox)obj;
+                    ck.Checked = ck == (CheckBox)sender;
+                    if (ck.Checked)
+                    {
+                        WaterMark.Alignment = (ContentAlignment)(int.Parse(((CheckBox)sender).Tag.ToString()));
+                        SelectImageFromGrid();
+                    }
+                }
+            }
+        }
+
+        private void nudTransparency_ValueChanged(object sender, EventArgs e)
+        {
+            WaterMark.Transparency = (int)nudTransparency.Value;
+            SelectImageFromGrid();
+        }
+
+        private void nudOffSetX_ValueChanged(object sender, EventArgs e)
+        {
+            WaterMark.OffSet.Width = (int)nudOffSetX.Value;
+            SelectImageFromGrid();
+        }
+
+        private void nudOffSetY_ValueChanged(object sender, EventArgs e)
+        {
+            WaterMark.OffSet.Height = (int)nudOffSetY.Value;
+            SelectImageFromGrid();
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            frmAbout f = new frmAbout();
+            f.ShowDialog();
+            f.Dispose();
+        }
+
+        private void pbImage_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
