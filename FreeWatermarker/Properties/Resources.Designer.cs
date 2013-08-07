@@ -63,6 +63,26 @@ namespace FreeWatermarker.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Cancel32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Cancel32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Check32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Check32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ColorPicker32x32 {
             get {
                 object obj = ResourceManager.GetObject("ColorPicker32x32", resourceCulture);

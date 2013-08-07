@@ -142,6 +142,7 @@
             // 
             // btnSave
             // 
+            this.btnSave.BackgroundImage = global::FreeWatermarker.Properties.Resources.Save32x32;
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSave.Location = new System.Drawing.Point(351, 308);
             this.btnSave.Name = "btnSave";
@@ -152,6 +153,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.BackgroundImage = global::FreeWatermarker.Properties.Resources.Cancel32x32;
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(309, 308);

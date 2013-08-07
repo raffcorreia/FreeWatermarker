@@ -36,6 +36,8 @@
             this.ColumnImg = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColumnDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnApplyAll = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
             this.nudOffSetY = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
@@ -187,6 +189,8 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.btnApplyAll);
+            this.splitContainer2.Panel1.Controls.Add(this.btnApply);
             this.splitContainer2.Panel1.Controls.Add(this.btnAbout);
             this.splitContainer2.Panel1.Controls.Add(this.nudOffSetY);
             this.splitContainer2.Panel1.Controls.Add(this.label4);
@@ -213,11 +217,33 @@
             this.splitContainer2.SplitterDistance = 150;
             this.splitContainer2.TabIndex = 2;
             // 
+            // btnApplyAll
+            // 
+            this.btnApplyAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnApplyAll.Location = new System.Drawing.Point(2, 89);
+            this.btnApplyAll.Name = "btnApplyAll";
+            this.btnApplyAll.Size = new System.Drawing.Size(30, 30);
+            this.btnApplyAll.TabIndex = 22;
+            this.btnApplyAll.Text = "AL";
+            this.btnApplyAll.UseVisualStyleBackColor = true;
+            this.btnApplyAll.Visible = false;
+            // 
+            // btnApply
+            // 
+            this.btnApply.BackgroundImage = global::FreeWatermarker.Properties.Resources.Check32x32;
+            this.btnApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnApply.Location = new System.Drawing.Point(2, 60);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(30, 30);
+            this.btnApply.TabIndex = 21;
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
             // btnAbout
             // 
             this.btnAbout.BackgroundImage = global::FreeWatermarker.Properties.Resources.Info32x32;
             this.btnAbout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAbout.Location = new System.Drawing.Point(3, 118);
+            this.btnAbout.Location = new System.Drawing.Point(2, 118);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(30, 30);
             this.btnAbout.TabIndex = 20;
@@ -228,6 +254,11 @@
             // 
             this.nudOffSetY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nudOffSetY.Location = new System.Drawing.Point(119, 72);
+            this.nudOffSetY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.nudOffSetY.Name = "nudOffSetY";
             this.nudOffSetY.Size = new System.Drawing.Size(42, 20);
             this.nudOffSetY.TabIndex = 18;
@@ -256,6 +287,11 @@
             // 
             this.nudOffSetX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nudOffSetX.Location = new System.Drawing.Point(119, 51);
+            this.nudOffSetX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.nudOffSetX.Name = "nudOffSetX";
             this.nudOffSetX.Size = new System.Drawing.Size(42, 20);
             this.nudOffSetX.TabIndex = 14;
@@ -473,7 +509,7 @@
             // 
             this.btnSaveImages.BackgroundImage = global::FreeWatermarker.Properties.Resources.Save32x32;
             this.btnSaveImages.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSaveImages.Location = new System.Drawing.Point(3, 38);
+            this.btnSaveImages.Location = new System.Drawing.Point(2, 31);
             this.btnSaveImages.Name = "btnSaveImages";
             this.btnSaveImages.Size = new System.Drawing.Size(30, 30);
             this.btnSaveImages.TabIndex = 5;
@@ -557,7 +593,6 @@
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 0;
             this.pbImage.TabStop = false;
-            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
             this.pbImage.DoubleClick += new System.EventHandler(this.pbImage_DoubleClick);
             this.pbImage.MouseEnter += new System.EventHandler(this.pbImage_MouseEnter);
             this.pbImage.MouseLeave += new System.EventHandler(this.pbImage_MouseLeave);
@@ -659,6 +694,7 @@
             this.MinimumSize = new System.Drawing.Size(570, 360);
             this.Name = "frmWatermark";
             this.Text = "Free Watermarker";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmWatermark_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmWatermark_DragEnter);
             this.DragLeave += new System.EventHandler(this.frmWatermark_DragLeave);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -743,6 +779,8 @@
         private System.Windows.Forms.NumericUpDown nudOffSetY;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnAbout;
+        private System.Windows.Forms.Button btnApply;
+        private System.Windows.Forms.Button btnApplyAll;
     }
 }
 

@@ -65,7 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsImageItem.cs" />
+    <Compile Include="clsWaterMarker.cs" />
+    <Compile Include="clsBatchWaterMarker.cs" />
     <Compile Include="clsWaterMark.cs" />
+    <Compile Include="clsImageWaterMark.cs" />
+    <Compile Include="clsTextWaterMark.cs" />
     <Compile Include="frmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,8 +178,12 @@
     <None Include="Resources\exe.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="exe.ico" />
     <None Include="Resources\ColorPicker32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="exe.ico" />
+    <None Include="Resources\Check32x32.png" />
+    <None Include="Resources\Cancel32x32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

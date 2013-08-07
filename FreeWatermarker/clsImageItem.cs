@@ -9,7 +9,7 @@ using System.IO;
 namespace FreeWatermarker
 {
 
-    public class clsImageItem : ListViewItem
+    public class clsImageItem //: ListViewItem
     {
         private Bitmap _image;
         public Bitmap Image
@@ -25,49 +25,55 @@ namespace FreeWatermarker
             set { _url = value; }
         }
 
-        private bool _WMHasTransparency;
-        public bool WMHasTransparency
+        private List<clsWaterMark> _WaterMarks;
+        public List<clsWaterMark> WaterMarks
         {
-            get { return _WMHasTransparency; }
-            set { _WMHasTransparency = value; }
+            get { return _WaterMarks; }
+            set { _WaterMarks = value; }
         }
 
-        private Color _WMTransparentColor;
-        public Color WMTransparentColor
-        {
-            get { return _WMTransparentColor; }
-            set { _WMTransparentColor = value; }
-        }
+        ///DEPRECATED, now the watermark is on a list of watermarks
+        //private bool _WMHasTransparency;
+        //public bool WMHasTransparency
+        //{
+        //    get { return _WMHasTransparency; }
+        //    set { _WMHasTransparency = value; }
+        //}
 
-        private ContentAlignment _WMAlignment;
-        public ContentAlignment WMAlignment
-        {
-            get { return _WMAlignment; }
-            set { _WMAlignment = value; }
-        }
+        //private Color _WMTransparentColor;
+        //public Color WMTransparentColor
+        //{
+        //    get { return _WMTransparentColor; }
+        //    set { _WMTransparentColor = value; }
+        //}
 
-        private int _WMTransparency;
-        public int WMTransparency
-        {
-            get { return _WMTransparency; }
-            set { _WMTransparency = value; }
-        }
+        //private ContentAlignment _WMAlignment;
+        //public ContentAlignment WMAlignment
+        //{
+        //    get { return _WMAlignment; }
+        //    set { _WMAlignment = value; }
+        //}
 
-        private int _WMHashCode;
-        public int WMHashCode
-        {
-            get { return _WMHashCode; }
-            set { _WMHashCode = value; }
-        }
+        //private int _WMTransparency;
+        //public int WMTransparency
+        //{
+        //    get { return _WMTransparency; }
+        //    set { _WMTransparency = value; }
+        //}
 
-        private Bitmap _imgWMCut;
-        public Bitmap ImgWMCut
-        {
-            get { return _imgWMCut; }
-            set { _imgWMCut = value; }
-        }
-
-        public Size WMOffSet;
+        //private int _WMHashCode;
+        //public int WMHashCode
+        //{
+        //    get { return _WMHashCode; }
+        //    set { _WMHashCode = value; }
+        //}
+        //private Bitmap _imgWMCut;
+        //public Bitmap ImgWMCut
+        //{
+        //    get { return _imgWMCut; }
+        //    set { _imgWMCut = value; }
+        //}
+        //public Size WMOffSet;
             
         public clsImageItem(string url)
         {
@@ -77,6 +83,8 @@ namespace FreeWatermarker
                 FileStream fs = new FileStream(_url, FileMode.Open);
                 _image = new Bitmap(fs);
                 fs.Close();
+
+                _WaterMarks = new List<clsWaterMark>();
             }
             catch (Exception)
             {
