@@ -9,7 +9,7 @@ using System.IO;
 namespace FreeWatermarker
 {
 
-    public class clsImageItem //: ListViewItem
+    public class clsImageItem
     {
         private Bitmap _image;
         public Bitmap Image
@@ -32,48 +32,12 @@ namespace FreeWatermarker
             set { _WaterMarks = value; }
         }
 
-        ///DEPRECATED, now the watermark is on a list of watermarks
-        //private bool _WMHasTransparency;
-        //public bool WMHasTransparency
-        //{
-        //    get { return _WMHasTransparency; }
-        //    set { _WMHasTransparency = value; }
-        //}
-
-        //private Color _WMTransparentColor;
-        //public Color WMTransparentColor
-        //{
-        //    get { return _WMTransparentColor; }
-        //    set { _WMTransparentColor = value; }
-        //}
-
-        //private ContentAlignment _WMAlignment;
-        //public ContentAlignment WMAlignment
-        //{
-        //    get { return _WMAlignment; }
-        //    set { _WMAlignment = value; }
-        //}
-
-        //private int _WMTransparency;
-        //public int WMTransparency
-        //{
-        //    get { return _WMTransparency; }
-        //    set { _WMTransparency = value; }
-        //}
-
-        //private int _WMHashCode;
-        //public int WMHashCode
-        //{
-        //    get { return _WMHashCode; }
-        //    set { _WMHashCode = value; }
-        //}
-        //private Bitmap _imgWMCut;
-        //public Bitmap ImgWMCut
-        //{
-        //    get { return _imgWMCut; }
-        //    set { _imgWMCut = value; }
-        //}
-        //public Size WMOffSet;
+        private bool _WaterMarkerApplied;
+        public bool WaterMarkerApplied
+        {
+            get { return _WaterMarkerApplied; }
+            set { _WaterMarkerApplied = value; }
+        }
             
         public clsImageItem(string url)
         {

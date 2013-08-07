@@ -36,7 +36,7 @@ namespace FreeWatermarker
 
             foreach (clsImageItem item in images)
             {
-                WaterMarker.CreateAndInsertWaterMark(item, item.WaterMarks[0]);
+                item.Image = WaterMarker.CreateAndInsertWaterMark(item, item.WaterMarks[0]);
             }
 
         }

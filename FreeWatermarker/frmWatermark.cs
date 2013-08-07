@@ -187,7 +187,17 @@ namespace FreeWatermarker
             {
                 if (index != previusSelected)
                 {
-                    pbImage.Image = WaterMark.CreateAndInsertWaterMark(images[index], imgWM.Clone());
+                    if (images[index].WaterMarks.Count <= 0)
+                    {
+                        images[index].WaterMarks.Add(imgWM.Clone());
+                        WaterMark.CreateWaterMark(images[index]);
+                    }
+                    else if(images[index].WaterMarks[0] != imgWM)
+                    {
+                        images[index].WaterMarks[0] = imgWM.Clone();
+                        WaterMark.CreateWaterMark(images[index]);
+                    }
+                    pbImage.Image = WaterMark.insertWaterMark(images[index]);
                 }
             }
         }
@@ -348,10 +358,9 @@ namespace FreeWatermarker
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            clsBatchWaterMarker WMBatch = new clsBatchWaterMarker(ref images);
-
             for (int x = 0; x < images.Count; x++)
             {
+                images[x].WaterMarkerApplied = true;
                 if (images[x].WaterMarks.Count == 0)
                 {
                     images[x].WaterMarks.Add(imgWM.Clone());
@@ -361,7 +370,7 @@ namespace FreeWatermarker
                     images[x].WaterMarks[0] = imgWM.Clone();
                 }
             }
-
+            clsBatchWaterMarker WMBatch = new clsBatchWaterMarker(ref images);
             WMBatch.WaterMark();
         }
     }

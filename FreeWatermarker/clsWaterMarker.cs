@@ -10,89 +10,10 @@ namespace FreeWatermarker
 {
     public class clsWaterMarker
     {
-        //private Bitmap _imgWaterMark;
-        //public Bitmap ImgWaterMark
-        //{
-        //    get { return _imgWaterMark; }
-        //    set { _imgWaterMark = value; }
-        //}
-
-        //private ContentAlignment _Alignment;
-        //public ContentAlignment Alignment
-        //{
-        //    get { return _Alignment; }
-        //    set { _Alignment = value; }
-        //}
-
-        //private bool _HasTransparentColor;
-        //public bool HasTransparentColor
-        //{
-        //    get { return _HasTransparentColor; }
-        //    set { _HasTransparentColor = value; }
-        //}
-
-        //private Color _TransparentColor;
-        //public Color TransparentColor
-        //{
-        //    get { return _TransparentColor; }
-        //    set { _TransparentColor = value; }
-        //}
-
-        //private int _Transparency;
-        //public int Transparency
-        //{
-        //    get { return _Transparency; }
-        //    set { _Transparency = value; }
-        //}
-
-        //public Size OffSet;
-
         public clsWaterMarker()
         {
             
         }
-
-        //private bool IsWMPieceUpdated(clsImageItem item)
-        //{
-            
-        //    if (_imgWaterMark.GetHashCode() != item.WMHashCode)
-        //    {
-        //        return false;
-        //    }
-        //    if (HasTransparentColor != item.WMHasTransparency)
-        //    {
-        //        return false;
-        //    }
-        //    if (TransparentColor != item.WMTransparentColor)
-        //    {
-        //        return false;
-        //    }
-        //    if (Alignment != item.WMAlignment)
-        //    {
-        //        return false;
-        //    }
-        //    if (Transparency != item.WMTransparency)
-        //    {
-        //        return false;
-        //    }
-        //    if (OffSet != item.WMOffSet)
-        //    {
-        //        return false;
-        //    }
-            
-        //    return true;
-        //}
-
-        //private void UpdatedWMItem(clsImageItem item)
-        //{
-        //    item.WMHashCode = _imgWaterMark.GetHashCode();
-        //    item.WMHasTransparency = HasTransparentColor;
-        //    item.WMTransparentColor = TransparentColor;
-        //    item.WMAlignment = Alignment;
-        //    item.WMTransparency = Transparency;
-        //    item.WMOffSet = OffSet;
-        //    UpdateWMPiece(item);
-        //}
 
         private void CalculateWMPosition(ref Point WMPosition, clsWaterMark WM, Size ImgSize)
         {
@@ -147,6 +68,16 @@ namespace FreeWatermarker
                     return (int)(field - size - ((field - size) * offSet / 100.0));
             }
             return 0;
+        }
+
+        public void CreateWaterMark(clsImageItem item)
+        {
+            CreateWMImagePiece(item, (clsImageWaterMark)item.WaterMarks[0]);
+        }
+
+        public Bitmap CreateAndInsertWaterMark(clsImageItem item)
+        {
+            return CreateAndInsertWaterMark(item, item.WaterMarks[0]);
         }
 
         public Bitmap CreateAndInsertWaterMark(clsImageItem item, clsWaterMark WM)

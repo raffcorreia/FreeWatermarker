@@ -24,17 +24,32 @@ namespace FreeWatermarker
 
             if (images == null)
             {
-                impossibleToSave();
+                impossibleToSave("There is no images to save!");
             }
-            if (images.Count <= 0)
+            else if (images.Count <= 0)
             {
-                impossibleToSave();
+                impossibleToSave("There is no images to save!");
             }
+            else
+            {
+                bool applied = true;
+                int x = 0;
+                while(x < images.Count && images[x].WaterMarkerApplied == false)
+                {
+                    applied = images[x].WaterMarkerApplied;
+                    x++;
+                }
+                if (!applied)
+                {
+                    impossibleToSave("You never applied your WaterMarks changes. You need to apply before save!");
+                }
+            }
+
         }
 
-        private void impossibleToSave()
+        private void impossibleToSave(string msg)
         {
-            MessageBox.Show("There is no images to save!", "What images?", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show(msg, "What images?", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             this.btnSave.Enabled = false;
             this.rbReplace.Enabled = false;
             this.rbReplace.Checked = false;
@@ -45,7 +60,10 @@ namespace FreeWatermarker
         private void btnSave_Click(object sender, EventArgs e)
         {
             int ret = prepareToSave();
-            MessageBox.Show(ret.ToString() + " of " + images.Count.ToString() + " images was saved!", "Finish!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (ret > 0)
+            {
+                MessageBox.Show(ret.ToString() + " of " + images.Count.ToString() + " images was saved!", "Finish!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private int prepareToSave()
@@ -134,6 +152,7 @@ namespace FreeWatermarker
                 catch (Exception)
                 {
                     MessageBox.Show("Erro saving file.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return 0;
                 }
                 count++;
             }
