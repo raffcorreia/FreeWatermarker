@@ -15,57 +15,80 @@ namespace FreeWatermarker
             
         }
 
-        private void CalculateWMPosition(ref Point WMPosition, clsWaterMark WM, Size ImgSize)
+        private Point CalculateWMPosition(WaterMarkLayout Layout, Size WMSize, Size WMOffSet, Size ImgSize)
         {
+            Point position = new Point();
             //Height
-            if (WM.Alignment == ContentAlignment.TopLeft ||
-                WM.Alignment == ContentAlignment.TopCenter ||
-                WM.Alignment == ContentAlignment.TopRight)
+            if (Layout == WaterMarkLayout.TopLeft ||
+                Layout == WaterMarkLayout.TopCenter ||
+                Layout == WaterMarkLayout.TopRight)
             {
-                WMPosition.Y = Calculate3PointPosition(1, ImgSize.Height, WM.Height, WM.OffSet.Height);
+                position.Y = Calculate3PointPosition(1, ImgSize.Height, WMSize.Height, WMOffSet.Height);
             }
-            else if (WM.Alignment == ContentAlignment.MiddleLeft ||
-                     WM.Alignment == ContentAlignment.MiddleCenter ||
-                     WM.Alignment == ContentAlignment.MiddleRight)
+            else if (Layout == WaterMarkLayout.MiddleLeft ||
+                     Layout == WaterMarkLayout.MiddleCenter ||
+                     Layout == WaterMarkLayout.MiddleRight ||
+                     Layout == WaterMarkLayout.Fill ||
+                     Layout == WaterMarkLayout.Ajust)
             {
-                WMPosition.Y = Calculate3PointPosition(2, ImgSize.Height, WM.Height, WM.OffSet.Height);
+                position.Y = Calculate3PointPosition(2, ImgSize.Height, WMSize.Height, WMOffSet.Height);
             }
-            else if (WM.Alignment == ContentAlignment.BottomLeft ||
-                     WM.Alignment == ContentAlignment.BottomCenter ||
-                     WM.Alignment == ContentAlignment.BottomRight)
+            else if (Layout == WaterMarkLayout.BottomLeft ||
+                     Layout == WaterMarkLayout.BottomCenter ||
+                     Layout == WaterMarkLayout.BottomRight)
             {
-                WMPosition.Y = Calculate3PointPosition(3, ImgSize.Height, WM.Height, WM.OffSet.Height);
+                position.Y = Calculate3PointPosition(3, ImgSize.Height, WMSize.Height, WMOffSet.Height);
             }
             //Width
-            if (WM.Alignment == ContentAlignment.TopLeft ||
-                WM.Alignment == ContentAlignment.MiddleLeft ||
-                WM.Alignment == ContentAlignment.BottomLeft)
+            if (Layout == WaterMarkLayout.TopLeft ||
+                Layout == WaterMarkLayout.MiddleLeft ||
+                Layout == WaterMarkLayout.BottomLeft)
             {
-                WMPosition.X = Calculate3PointPosition(1, ImgSize.Width, WM.Width, WM.OffSet.Width);
+                position.X = Calculate3PointPosition(1, ImgSize.Width, WMSize.Width, WMOffSet.Width);
             }
-            else if (WM.Alignment == ContentAlignment.TopCenter ||
-                     WM.Alignment == ContentAlignment.MiddleCenter ||
-                     WM.Alignment == ContentAlignment.BottomCenter)
+            else if (Layout == WaterMarkLayout.TopCenter ||
+                     Layout == WaterMarkLayout.MiddleCenter ||
+                     Layout == WaterMarkLayout.BottomCenter ||
+                     Layout == WaterMarkLayout.Fill ||
+                     Layout == WaterMarkLayout.Ajust)
             {
-                WMPosition.X = Calculate3PointPosition(2, ImgSize.Width, WM.Width, WM.OffSet.Width);
+                position.X = Calculate3PointPosition(2, ImgSize.Width, WMSize.Width, WMOffSet.Width);
             }
-            else if (WM.Alignment == ContentAlignment.TopRight ||
-                     WM.Alignment == ContentAlignment.MiddleRight ||
-                     WM.Alignment == ContentAlignment.BottomRight)
+            else if (Layout == WaterMarkLayout.TopRight ||
+                     Layout == WaterMarkLayout.MiddleRight ||
+                     Layout == WaterMarkLayout.BottomRight)
             {
-                WMPosition.X = Calculate3PointPosition(3, ImgSize.Width, WM.Width, WM.OffSet.Width);
+                position.X = Calculate3PointPosition(3, ImgSize.Width, WMSize.Width, WMOffSet.Width);
             }
+            return position;
         }
+
         private int Calculate3PointPosition(int pos, int field, int size, int offSet)
         {
+            double percentOffSet;
+            if ((field - size) == 0)
+            {
+                percentOffSet = (field * offSet / 100.0);  //offSet;
+            }
+            else 
+            {
+                percentOffSet = ((field - size) * offSet / 100.0);
+            }
             switch (pos)
             {
                 case 1:
-                    return (int)((field - size) * offSet / 100.0);
+                    return (int)percentOffSet;
                 case 2:
-                    return (int)((field / 2) - (size / 2) - ((field - size) * offSet / 100.0));
+                    //if (field > size)
+                    //{
+                    return (int)((field / 2) - (size / 2) - percentOffSet);
+                    //}
+                    //else
+                    //{
+                    //    return (int)((size / 2) - (field / 2) - ((size - field) * offSet / 100.0));
+                    //}
                 case 3:
-                    return (int)(field - size - ((field - size) * offSet / 100.0));
+                    return (int)(field - size - percentOffSet);
             }
             return 0;
         }
@@ -104,8 +127,8 @@ namespace FreeWatermarker
         public Bitmap insertImageWaterMark(clsImageItem item, clsImageWaterMark WM)
         {
             Point WMPosition = new Point();
-            CalculateWMPosition(ref WMPosition, WM, item.Image.Size);
-            
+            WMPosition = CalculateWMPosition(WM.Layout, WM.ImgWaterMark.Size, WM.OffSet, item.Image.Size);
+
             Bitmap img = new Bitmap(item.Image);
             Graphics grPhoto = Graphics.FromImage(img);
 
@@ -118,9 +141,10 @@ namespace FreeWatermarker
                 img.Height,
                 GraphicsUnit.Pixel
             );
-
+            img.Save("z:\\teste.jpg");
+            WM.ImgWaterMark.Save("z:\\teste2.jpg");
             return img;
-        }
+       }
 
         private void CreateWMImagePiece(clsImageItem item, int WMIndex)
         {
@@ -129,10 +153,13 @@ namespace FreeWatermarker
 
         private void CreateWMImagePiece(clsImageItem item, clsImageWaterMark WM)
         {
+            Size NewWMSize = new Size(); //(WM.Width, WM.Height);
             Point WMPosition = new Point();
-            CalculateWMPosition(ref WMPosition, WM, item.Image.Size);
 
-            Bitmap imgPiece = new Bitmap(WM.Width, WM.Height, PixelFormat.Format24bppRgb);
+            NewWMSize = CalculateWMSize(WM.Layout, WM.ImgWaterMark.Size, item.Image.Size);
+            WMPosition = CalculateWMPosition(WM.Layout, NewWMSize, WM.OffSet, item.Image.Size);
+
+            Bitmap imgPiece = new Bitmap(NewWMSize.Width, NewWMSize.Height, PixelFormat.Format24bppRgb);
             imgPiece.SetResolution(item.Image.HorizontalResolution, item.Image.VerticalResolution);
             Graphics grPiece = Graphics.FromImage(imgPiece);
 
@@ -170,7 +197,7 @@ namespace FreeWatermarker
 
             grPiece.DrawImage(
                 WM.ImgWaterMark,
-                new Rectangle(0, 0, WM.Width, WM.Height),
+                new Rectangle(0, 0, NewWMSize.Width, NewWMSize.Height),
                 0,
                 0,
                 WM.Width,
@@ -182,6 +209,48 @@ namespace FreeWatermarker
             grPiece.Dispose();
 
             WM.ImgWaterMark = imgPiece;
+        }
+
+        private Size CalculateWMSize(WaterMarkLayout Layout, Size WMSize, Size ImgSize)
+        {
+            Size NewSize = new Size(WMSize.Width, WMSize.Height);
+
+            if (Layout == WaterMarkLayout.Zoom)
+            {
+                NewSize.Width = ImgSize.Width;
+                NewSize.Height = ImgSize.Height;
+            }
+            else
+            {
+                if (WMSize.Width > WMSize.Height)
+                {
+                    if (Layout == WaterMarkLayout.Ajust)
+                    {
+                        NewSize.Width = ImgSize.Width;
+                        NewSize.Height = (int)(((double)ImgSize.Width) / (double)WMSize.Width * (double)WMSize.Height);
+                    }
+                    else if (Layout == WaterMarkLayout.Fill)
+                    {
+                        NewSize.Width = (int)(((double)ImgSize.Height) / (double)WMSize.Height * (double)WMSize.Width);
+                        NewSize.Height = ImgSize.Height;
+                    }
+                }
+                else
+                {
+                    if (Layout == WaterMarkLayout.Ajust)
+                    {
+                        NewSize.Width = (int)(((double)ImgSize.Height) / (double)WMSize.Height * (double)WMSize.Width);
+                        NewSize.Height = ImgSize.Height;
+                    }
+                    else if (Layout == WaterMarkLayout.Fill)
+                    {
+                        NewSize.Width = ImgSize.Width;
+                        NewSize.Height = (int)(((double)ImgSize.Width) / (double)WMSize.Width * (double)WMSize.Height);
+                    }
+                }
+            }
+
+            return NewSize;
         }
 
     }

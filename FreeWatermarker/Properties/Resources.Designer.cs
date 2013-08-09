@@ -83,6 +83,16 @@ namespace FreeWatermarker.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CheckAll32x32 {
+            get {
+                object obj = ResourceManager.GetObject("CheckAll32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ColorPicker32x32 {
             get {
                 object obj = ResourceManager.GetObject("ColorPicker32x32", resourceCulture);
@@ -97,6 +107,16 @@ namespace FreeWatermarker.Properties {
             get {
                 object obj = ResourceManager.GetObject("exe", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Image16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Image16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -176,6 +196,56 @@ namespace FreeWatermarker.Properties {
         internal static System.Drawing.Bitmap Save32x32 {
             get {
                 object obj = ResourceManager.GetObject("Save32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Text16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Text16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WMAjusted32x32 {
+            get {
+                object obj = ResourceManager.GetObject("WMAjusted32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WMFill32x32 {
+            get {
+                object obj = ResourceManager.GetObject("WMFill32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WMRepeat32x32 {
+            get {
+                object obj = ResourceManager.GetObject("WMRepeat32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WMZoomed32x32 {
+            get {
+                object obj = ResourceManager.GetObject("WMZoomed32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

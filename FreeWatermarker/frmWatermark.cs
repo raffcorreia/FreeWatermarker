@@ -27,9 +27,18 @@ namespace FreeWatermarker
             previusSelected = -1;
             imgWM.HasTransparentColor = true;
             imgWM.TransparentColor = Color.White;
-            imgWM.Alignment = ContentAlignment.MiddleCenter;
+            imgWM.Layout = WaterMarkLayout.MiddleCenter;
             checkBox5.Checked = true;
-            nudTransparency.Value = 50;
+
+            //TAB Pictures
+            ImageList il = new ImageList();
+            il.Images.Add(Properties.Resources.Image16x16);
+            il.Images.Add(Properties.Resources.Text16x16);
+            tabControl1.ImageList = il;
+            tabPage1.ImageIndex = 0;
+            tabPage2.ImageIndex = 1;
+            //
+
 
             loadImages(new string[] { "..\\..\\..\\..\\1.jpg", "..\\..\\..\\..\\2.jpg", "..\\..\\..\\..\\3.jpg", "..\\..\\..\\..\\4.jpg" });
             LoadWaterMark("..\\..\\Images\\watermark.bmp");
@@ -324,7 +333,7 @@ namespace FreeWatermarker
                     ck.Checked = ck == (CheckBox)sender;
                     if (ck.Checked)
                     {
-                        imgWM.Alignment = (ContentAlignment)(int.Parse(((CheckBox)sender).Tag.ToString()));
+                        imgWM.Layout = (WaterMarkLayout)(int.Parse(((CheckBox)sender).Tag.ToString()));
                         SelectImageFromGrid();
                     }
                 }

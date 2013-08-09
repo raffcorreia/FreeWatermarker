@@ -182,6 +182,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="exe.ico" />
+    <None Include="Resources\CheckAll32x32.png" />
+    <None Include="Resources\WMZoomed32x32.png" />
+    <None Include="Resources\WMRepeat32x32.png" />
+    <None Include="Resources\WMFill32x32.png" />
+    <None Include="Resources\WMAjusted32x32.png" />
+    <None Include="Resources\Text16x16.png" />
+    <None Include="Resources\Image16x16.png" />
     <None Include="Resources\Check32x32.png" />
     <None Include="Resources\Cancel32x32.png" />
   </ItemGroup>

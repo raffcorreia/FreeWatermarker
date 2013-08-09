@@ -10,11 +10,11 @@ namespace FreeWatermarker
 {
     public class clsWaterMark : ICloneable
     {
-        private ContentAlignment _Alignment;
-        public ContentAlignment Alignment
+        private WaterMarkLayout _Layout;
+        public WaterMarkLayout Layout
         {
-            get { return _Alignment; }
-            set { _Alignment = value; }
+            get { return _Layout; }
+            set { _Layout = value; }
         }
 
         private int _Transparency;
@@ -54,6 +54,22 @@ namespace FreeWatermarker
         {
             return (clsWaterMark)this.MemberwiseClone();
         }
+    }
 
+    public enum WaterMarkLayout
+    {
+        TopLeft,
+        TopCenter,
+        TopRight,
+        MiddleLeft,
+        MiddleCenter,
+        MiddleRight,
+        BottomLeft,
+        BottomCenter,
+        BottomRight,
+        Ajust,
+        Zoom,
+        Fill,
+        Repeat
     }
 }
