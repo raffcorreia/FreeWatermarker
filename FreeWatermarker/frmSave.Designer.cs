@@ -240,7 +240,7 @@
             this.Name = "frmSave";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "How do you like to save?";
+            this.Text = "How would you like to save?";
             this.gpbSerieName.ResumeLayout(false);
             this.gpbSerieName.PerformLayout();
             this.gpbCreateFolder.ResumeLayout(false);

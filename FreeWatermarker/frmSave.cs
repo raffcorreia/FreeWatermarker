@@ -34,7 +34,7 @@ namespace FreeWatermarker
             {
                 bool applied = true;
                 int x = 0;
-                while(x < images.Count && images[x].WaterMarkerApplied == false)
+                while (x < images.Count && images[x].WaterMarkerApplied == false)
                 {
                     applied = images[x].WaterMarkerApplied;
                     x++;
@@ -59,14 +59,14 @@ namespace FreeWatermarker
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int ret = prepareToSave();
+            int ret = prepareAndSave();
             if (ret > 0)
             {
                 MessageBox.Show(ret.ToString() + " of " + images.Count.ToString() + " images was saved!", "Finish!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
-        private int prepareToSave()
+        private int prepareAndSave()
         {
             if (rbReplace.Checked)
             {
@@ -107,7 +107,14 @@ namespace FreeWatermarker
                 }
                 else
                 {
-                    return SaveFiles("", seqName) -1;
+                    if (chkChangeNames.Checked == false)
+                    {
+                        MessageBox.Show("You must change the original names or create a folder or both, otherwise your files will be replaced.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        return SaveFiles("", seqName) - 1;
+                    }
                 }
             }
             return 0;

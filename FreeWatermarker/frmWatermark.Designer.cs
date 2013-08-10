@@ -179,19 +179,21 @@
             this.gridImages.AllowUserToAddRows = false;
             this.gridImages.AllowUserToResizeColumns = false;
             this.gridImages.AllowUserToResizeRows = false;
+            this.gridImages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridImages.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridImages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridImages.ColumnHeadersVisible = false;
             this.gridImages.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnImg,
             this.ColumnDesc});
-            this.gridImages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridImages.Location = new System.Drawing.Point(0, 0);
+            this.gridImages.Location = new System.Drawing.Point(0, 33);
             this.gridImages.Name = "gridImages";
             this.gridImages.ReadOnly = true;
             this.gridImages.RowHeadersVisible = false;
             this.gridImages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridImages.Size = new System.Drawing.Size(160, 428);
+            this.gridImages.Size = new System.Drawing.Size(160, 395);
             this.gridImages.TabIndex = 0;
             this.gridImages.SelectionChanged += new System.EventHandler(this.gridImages_SelectionChanged);
             this.gridImages.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gridImages_UserDeletingRow);
@@ -273,7 +275,7 @@
             // 
             // btnRemoveImageWaterMark
             // 
-            this.btnRemoveImageWaterMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveImageWaterMark.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnRemoveImageWaterMark.BackgroundImage = global::FreeWatermarker.Properties.Resources.Cancel32x32;
             this.btnRemoveImageWaterMark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRemoveImageWaterMark.Location = new System.Drawing.Point(398, 92);
@@ -281,10 +283,11 @@
             this.btnRemoveImageWaterMark.Size = new System.Drawing.Size(30, 30);
             this.btnRemoveImageWaterMark.TabIndex = 23;
             this.btnRemoveImageWaterMark.UseVisualStyleBackColor = true;
+            this.btnRemoveImageWaterMark.Click += new System.EventHandler(this.btnRemoveImageWaterMark_Click);
             // 
             // btnOpenWaterMark
             // 
-            this.btnOpenWaterMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenWaterMark.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnOpenWaterMark.BackgroundImage = global::FreeWatermarker.Properties.Resources.Open32x32;
             this.btnOpenWaterMark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnOpenWaterMark.Location = new System.Drawing.Point(428, 92);
@@ -296,7 +299,7 @@
             // 
             // lblWMTransparentColor
             // 
-            this.lblWMTransparentColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWMTransparentColor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblWMTransparentColor.BackColor = System.Drawing.Color.White;
             this.lblWMTransparentColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblWMTransparentColor.Location = new System.Drawing.Point(297, 93);
@@ -308,7 +311,7 @@
             // 
             // btnViewWaterMark
             // 
-            this.btnViewWaterMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewWaterMark.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnViewWaterMark.BackgroundImage = global::FreeWatermarker.Properties.Resources.Preview32x32;
             this.btnViewWaterMark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnViewWaterMark.Location = new System.Drawing.Point(357, 92);
@@ -320,7 +323,7 @@
             // 
             // btnColorPicker
             // 
-            this.btnColorPicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnColorPicker.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnColorPicker.BackgroundImage = global::FreeWatermarker.Properties.Resources.ColorPicker32x32;
             this.btnColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnColorPicker.Location = new System.Drawing.Point(324, 92);
@@ -332,7 +335,7 @@
             // 
             // nudOffSetY
             // 
-            this.nudOffSetY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudOffSetY.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nudOffSetY.Location = new System.Drawing.Point(120, 69);
             this.nudOffSetY.Minimum = new decimal(new int[] {
             100,
@@ -346,6 +349,7 @@
             // 
             // btnApplyAll
             // 
+            this.btnApplyAll.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnApplyAll.BackgroundImage = global::FreeWatermarker.Properties.Resources.CheckAll32x32;
             this.btnApplyAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnApplyAll.Location = new System.Drawing.Point(-1, 30);
@@ -353,10 +357,11 @@
             this.btnApplyAll.Size = new System.Drawing.Size(30, 30);
             this.btnApplyAll.TabIndex = 22;
             this.btnApplyAll.UseVisualStyleBackColor = true;
+            this.btnApplyAll.Click += new System.EventHandler(this.btnApplyAll_Click);
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(61, 71);
             this.label4.Name = "label4";
@@ -366,6 +371,7 @@
             // 
             // btnAbout
             // 
+            this.btnAbout.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAbout.BackgroundImage = global::FreeWatermarker.Properties.Resources.Info32x32;
             this.btnAbout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAbout.Location = new System.Drawing.Point(-1, 92);
@@ -377,7 +383,7 @@
             // 
             // nudTransparency
             // 
-            this.nudTransparency.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudTransparency.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nudTransparency.Location = new System.Drawing.Point(120, 27);
             this.nudTransparency.Name = "nudTransparency";
             this.nudTransparency.Size = new System.Drawing.Size(42, 20);
@@ -391,7 +397,7 @@
             // 
             // nudOffSetX
             // 
-            this.nudOffSetX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudOffSetX.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nudOffSetX.Location = new System.Drawing.Point(120, 48);
             this.nudOffSetX.Minimum = new decimal(new int[] {
             100,
@@ -405,6 +411,7 @@
             // 
             // btnApply
             // 
+            this.btnApply.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnApply.BackgroundImage = global::FreeWatermarker.Properties.Resources.Check32x32;
             this.btnApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnApply.Location = new System.Drawing.Point(-1, 0);
@@ -416,7 +423,7 @@
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(36, 29);
             this.label3.Name = "label3";
@@ -427,7 +434,7 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(61, 50);
             this.label2.Name = "label2";
@@ -437,7 +444,7 @@
             // 
             // pbWatermark
             // 
-            this.pbWatermark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbWatermark.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pbWatermark.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbWatermark.Location = new System.Drawing.Point(297, 1);
             this.pbWatermark.Name = "pbWatermark";
@@ -449,7 +456,7 @@
             // 
             // panelPosition
             // 
-            this.panelPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelPosition.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelPosition.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelPosition.Controls.Add(this.checkBox13);
             this.panelPosition.Controls.Add(this.checkBox12);
@@ -746,7 +753,7 @@
             this.Controls.Add(this.ssStatus);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(570, 360);
+            this.MinimumSize = new System.Drawing.Size(640, 360);
             this.Name = "frmWatermark";
             this.Text = "Free Watermarker";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmWatermark_DragDrop);

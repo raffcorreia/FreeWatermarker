@@ -68,7 +68,7 @@ namespace FreeWatermarker
             double percentOffSet;
             if ((field - size) == 0)
             {
-                percentOffSet = (field * offSet / 100.0);  //offSet;
+                percentOffSet = (field * offSet / 100.0);
             }
             else 
             {
@@ -79,14 +79,7 @@ namespace FreeWatermarker
                 case 1:
                     return (int)percentOffSet;
                 case 2:
-                    //if (field > size)
-                    //{
                     return (int)((field / 2) - (size / 2) - percentOffSet);
-                    //}
-                    //else
-                    //{
-                    //    return (int)((size / 2) - (field / 2) - ((size - field) * offSet / 100.0));
-                    //}
                 case 3:
                     return (int)(field - size - percentOffSet);
             }
@@ -126,23 +119,30 @@ namespace FreeWatermarker
 
         public Bitmap insertImageWaterMark(clsImageItem item, clsImageWaterMark WM)
         {
-            Point WMPosition = new Point();
+            Point WMPosition;
+            Point SrcPosition = new Point();
             WMPosition = CalculateWMPosition(WM.Layout, WM.ImgWaterMark.Size, WM.OffSet, item.Image.Size);
 
             Bitmap img = new Bitmap(item.Image);
             Graphics grPhoto = Graphics.FromImage(img);
 
+            if (WM.Layout == WaterMarkLayout.Fill)
+            {
+                SrcPosition.X = Math.Abs(WMPosition.X);
+                SrcPosition.Y = Math.Abs(WMPosition.Y);
+                WMPosition = new Point();
+            }
+
             grPhoto.DrawImage(
                 WM.ImgWaterMark,
                 new Rectangle(WMPosition.X, WMPosition.Y, img.Width, img.Height),
-                0,
-                0,
+                SrcPosition.X,
+                SrcPosition.Y,
                 img.Width,
                 img.Height,
                 GraphicsUnit.Pixel
             );
-            img.Save("z:\\teste.jpg");
-            WM.ImgWaterMark.Save("z:\\teste2.jpg");
+
             return img;
        }
 
@@ -153,7 +153,7 @@ namespace FreeWatermarker
 
         private void CreateWMImagePiece(clsImageItem item, clsImageWaterMark WM)
         {
-            Size NewWMSize = new Size(); //(WM.Width, WM.Height);
+            Size NewWMSize = new Size();
             Point WMPosition = new Point();
 
             NewWMSize = CalculateWMSize(WM.Layout, WM.ImgWaterMark.Size, item.Image.Size);
@@ -219,6 +219,11 @@ namespace FreeWatermarker
             {
                 NewSize.Width = ImgSize.Width;
                 NewSize.Height = ImgSize.Height;
+            }
+            else if(Layout == WaterMarkLayout.Repeat)
+            {
+                NewSize.Width = (int)(ImgSize.Width / 5);
+                NewSize.Height = (int)(((double)NewSize.Width / (double)ImgSize.Width) * (double)WMSize.Height);
             }
             else
             {
