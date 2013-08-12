@@ -17,7 +17,14 @@ namespace FreeWatermarker
 
         private Point CalculateWMPosition(WaterMarkLayout Layout, Size WMSize, Size WMOffSet, Size ImgSize)
         {
-            Point position = new Point();
+            Point position = new Point(0, 0);
+
+            //Special Layout REPEAT
+            if (Layout == WaterMarkLayout.Repeat)
+            {
+                return position;
+            }
+
             //Height
             if (Layout == WaterMarkLayout.TopLeft ||
                 Layout == WaterMarkLayout.TopCenter ||
@@ -195,6 +202,11 @@ namespace FreeWatermarker
 
             imgAttrib.SetColorMatrix(wmColorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
+            if (WM.Layout == WaterMarkLayout.Repeat)
+            {
+                DrawWaterMarkRepetition(ref WM, NewWMSize);
+            }
+
             grPiece.DrawImage(
                 WM.ImgWaterMark,
                 new Rectangle(0, 0, NewWMSize.Width, NewWMSize.Height),
@@ -211,19 +223,66 @@ namespace FreeWatermarker
             WM.ImgWaterMark = imgPiece;
         }
 
+        private void DrawWaterMarkRepetition(ref clsImageWaterMark WM, Size NewWMSize)
+        {
+            Bitmap img = new Bitmap(NewWMSize.Width, NewWMSize.Height);
+            Size aux = new Size();
+            Size gap = new Size();
+            double ratioWidth = ((double)NewWMSize.Width / (double)(WM.ImgWaterMark.Width * WM.Columns));
+            double ratioHeight = ((double)NewWMSize.Height / (double)(WM.ImgWaterMark.Height * WM.Rows));
+
+
+            //NewSize.Width = ImgSize.Width;
+            //NewSize.Height = (int)(((double)ImgSize.Width / (double)WMSize.Width) * (double)WMSize.Height);
+
+            if (ratioWidth > ratioHeight)
+            {
+                aux.Height = (int)((double)WM.Height * (double)ratioHeight);
+                aux.Width = (int)((double)WM.Width * ((double)aux.Height / (double)WM.Height));
+            }
+            else 
+            {
+                aux.Width = (int)((double)WM.Width * (double)ratioWidth);
+                aux.Height = (int)((double)WM.Height * ((double)aux.Width / (double)WM.Width));
+            }
+
+            gap.Width = (int)((NewWMSize.Width - (aux.Width * WM.Columns)) / WM.Columns);
+            gap.Height = (int)((NewWMSize.Height - (aux.Height * WM.Rows)) / WM.Rows);
+            
+            Graphics grPiece = Graphics.FromImage(img);
+            int posX = 0;
+            int posY;
+            for (int x = 0; x < WM.Columns; x++)
+            {
+                posY = 0;
+                for (int y = 0; y < WM.Rows; y++)
+                {
+
+                    grPiece.DrawImage(
+                        WM.ImgWaterMark,
+                        new Rectangle(posX, posY, aux.Width, aux.Height),
+                        0,
+                        0,
+                        WM.ImgWaterMark.Width,
+                        WM.ImgWaterMark.Height,
+                        GraphicsUnit.Pixel
+                    );
+
+                    posY += gap.Height + aux.Height;
+                }
+                posX += gap.Width + aux.Width;
+            }
+            WM.ImgWaterMark = img;
+        }
+
         private Size CalculateWMSize(WaterMarkLayout Layout, Size WMSize, Size ImgSize)
         {
             Size NewSize = new Size(WMSize.Width, WMSize.Height);
 
-            if (Layout == WaterMarkLayout.Zoom)
-            {
+            if (Layout == WaterMarkLayout.Zoom || Layout == WaterMarkLayout.Repeat)
+            { 
                 NewSize.Width = ImgSize.Width;
                 NewSize.Height = ImgSize.Height;
-            }
-            else if(Layout == WaterMarkLayout.Repeat)
-            {
-                NewSize.Width = (int)(ImgSize.Width / 5);
-                NewSize.Height = (int)(((double)NewSize.Width / (double)ImgSize.Width) * (double)WMSize.Height);
             }
             else
             {
@@ -232,11 +291,11 @@ namespace FreeWatermarker
                     if (Layout == WaterMarkLayout.Ajust)
                     {
                         NewSize.Width = ImgSize.Width;
-                        NewSize.Height = (int)(((double)ImgSize.Width) / (double)WMSize.Width * (double)WMSize.Height);
+                        NewSize.Height = (int)(((double)ImgSize.Width / (double)WMSize.Width) * (double)WMSize.Height);
                     }
                     else if (Layout == WaterMarkLayout.Fill)
                     {
-                        NewSize.Width = (int)(((double)ImgSize.Height) / (double)WMSize.Height * (double)WMSize.Width);
+                        NewSize.Width = (int)(((double)ImgSize.Height / (double)WMSize.Height) * (double)WMSize.Width);
                         NewSize.Height = ImgSize.Height;
                     }
                 }

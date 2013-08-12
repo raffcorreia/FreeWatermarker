@@ -33,6 +33,20 @@ namespace FreeWatermarker
             set { _Width = value; }
         }
 
+        private int _Columns;
+        public int Columns
+        {
+            get { return _Columns; }
+            set { _Columns = value; }
+        }
+
+        private int _Rows;
+        public int Rows
+        {
+            get { return _Rows; }
+            set { _Rows = value; }
+        }
+
         private int _Height;
         public virtual int Height
         {

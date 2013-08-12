@@ -36,7 +36,6 @@ namespace FreeWatermarker
             tabPage2.ImageIndex = 1;
             //
 
-
             loadImages(new string[] { "..\\..\\..\\..\\1.jpg", "..\\..\\..\\..\\2.jpg", "..\\..\\..\\..\\3.jpg", "..\\..\\..\\..\\4.jpg" });
             LoadWaterMark("..\\..\\Images\\watermark.bmp");
 
@@ -60,13 +59,31 @@ namespace FreeWatermarker
                 }
                 imgWM.HasTransparentColor = WaterMarkHasTransparentColor;
                 imgWM.TransparentColor = lblWMTransparentColor.BackColor;
-                imgWM.Layout = WaterMarkLayout.MiddleCenter;
                 imgWM.Transparency = (int)nudTransparency.Value;
+                imgWM.Layout = GetSelectedLayout();
                 imgWM.OffSet.Width = (int)nudOffSetX.Value;
                 imgWM.OffSet.Height = (int)nudOffSetY.Value;
+                imgWM.Columns = (int)nudColumns.Value;
+                imgWM.Rows = (int)nudRows.Value;
 
                 SelectImageFromGrid();
             }
+        }
+
+        private WaterMarkLayout GetSelectedLayout()
+        {
+            foreach (object obj in panelPosition.Controls)
+            {
+                if (obj.GetType() == typeof(CheckBox))
+                {
+                    CheckBox ck = (CheckBox)obj;
+                    if (ck.Checked)
+                    {
+                        return  (WaterMarkLayout)(int.Parse(ck.Tag.ToString()));
+                    }
+                }
+            }
+            return WaterMarkLayout.MiddleCenter;
         }
 
         private void LoadWaterMark(string FileName)
@@ -356,7 +373,12 @@ namespace FreeWatermarker
                     if (ck.Checked)
                     {
                         imgWM.Layout = (WaterMarkLayout)(int.Parse(((CheckBox)sender).Tag.ToString()));
-                        SelectImageFromGrid();
+                        lblColumns.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
+                        lblRows.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
+                        nudColumns.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
+                        nudRows.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
+
+                        CreateOrUpdateImageWaterMark();
                     }
                 }
             }

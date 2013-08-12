@@ -41,6 +41,10 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.nudRows = new System.Windows.Forms.NumericUpDown();
+            this.lblRows = new System.Windows.Forms.Label();
+            this.nudColumns = new System.Windows.Forms.NumericUpDown();
+            this.lblColumns = new System.Windows.Forms.Label();
             this.btnRemoveImageWaterMark = new System.Windows.Forms.Button();
             this.btnOpenWaterMark = new System.Windows.Forms.Button();
             this.lblWMTransparentColor = new System.Windows.Forms.Label();
@@ -97,6 +101,8 @@
             this.splitContainer2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRows)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffSetY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTransparency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffSetX)).BeginInit();
@@ -249,6 +255,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.nudRows);
+            this.tabPage1.Controls.Add(this.lblRows);
+            this.tabPage1.Controls.Add(this.nudColumns);
+            this.tabPage1.Controls.Add(this.lblColumns);
             this.tabPage1.Controls.Add(this.btnRemoveImageWaterMark);
             this.tabPage1.Controls.Add(this.btnOpenWaterMark);
             this.tabPage1.Controls.Add(this.lblWMTransparentColor);
@@ -272,6 +282,76 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Image";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // nudRows
+            // 
+            this.nudRows.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nudRows.Enabled = false;
+            this.nudRows.Location = new System.Drawing.Point(120, 97);
+            this.nudRows.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.nudRows.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudRows.Name = "nudRows";
+            this.nudRows.Size = new System.Drawing.Size(42, 20);
+            this.nudRows.TabIndex = 26;
+            this.nudRows.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // lblRows
+            // 
+            this.lblRows.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblRows.AutoSize = true;
+            this.lblRows.Enabled = false;
+            this.lblRows.Location = new System.Drawing.Point(85, 101);
+            this.lblRows.Name = "lblRows";
+            this.lblRows.Size = new System.Drawing.Size(34, 13);
+            this.lblRows.TabIndex = 27;
+            this.lblRows.Text = "Rows";
+            // 
+            // nudColumns
+            // 
+            this.nudColumns.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nudColumns.Enabled = false;
+            this.nudColumns.Location = new System.Drawing.Point(120, 76);
+            this.nudColumns.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.nudColumns.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudColumns.Name = "nudColumns";
+            this.nudColumns.Size = new System.Drawing.Size(42, 20);
+            this.nudColumns.TabIndex = 24;
+            this.nudColumns.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // lblColumns
+            // 
+            this.lblColumns.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblColumns.AutoSize = true;
+            this.lblColumns.Enabled = false;
+            this.lblColumns.Location = new System.Drawing.Point(72, 78);
+            this.lblColumns.Name = "lblColumns";
+            this.lblColumns.Size = new System.Drawing.Size(47, 13);
+            this.lblColumns.TabIndex = 25;
+            this.lblColumns.Text = "Columns";
             // 
             // btnRemoveImageWaterMark
             // 
@@ -336,7 +416,7 @@
             // nudOffSetY
             // 
             this.nudOffSetY.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nudOffSetY.Location = new System.Drawing.Point(120, 69);
+            this.nudOffSetY.Location = new System.Drawing.Point(120, 48);
             this.nudOffSetY.Minimum = new decimal(new int[] {
             100,
             0,
@@ -363,7 +443,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(61, 71);
+            this.label4.Location = new System.Drawing.Point(61, 50);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 19;
@@ -384,7 +464,7 @@
             // nudTransparency
             // 
             this.nudTransparency.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nudTransparency.Location = new System.Drawing.Point(120, 27);
+            this.nudTransparency.Location = new System.Drawing.Point(120, 6);
             this.nudTransparency.Name = "nudTransparency";
             this.nudTransparency.Size = new System.Drawing.Size(42, 20);
             this.nudTransparency.TabIndex = 16;
@@ -398,7 +478,7 @@
             // nudOffSetX
             // 
             this.nudOffSetX.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nudOffSetX.Location = new System.Drawing.Point(120, 48);
+            this.nudOffSetX.Location = new System.Drawing.Point(120, 27);
             this.nudOffSetX.Minimum = new decimal(new int[] {
             100,
             0,
@@ -425,7 +505,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 29);
+            this.label3.Location = new System.Drawing.Point(36, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 17;
@@ -436,7 +516,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(61, 50);
+            this.label2.Location = new System.Drawing.Point(61, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 15;
@@ -482,7 +562,6 @@
             this.checkBox13.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBox13.BackgroundImage = global::FreeWatermarker.Properties.Resources.WMRepeat32x32;
             this.checkBox13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.checkBox13.Enabled = false;
             this.checkBox13.Location = new System.Drawing.Point(2, 88);
             this.checkBox13.Name = "checkBox13";
             this.checkBox13.Size = new System.Drawing.Size(30, 30);
@@ -772,6 +851,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRows)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudColumns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffSetY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTransparency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffSetX)).EndInit();
@@ -842,6 +923,10 @@
         private System.Windows.Forms.CheckBox checkBox12;
         private System.Windows.Forms.CheckBox checkBox11;
         private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.NumericUpDown nudRows;
+        private System.Windows.Forms.Label lblRows;
+        private System.Windows.Forms.NumericUpDown nudColumns;
+        private System.Windows.Forms.Label lblColumns;
     }
 }
 
