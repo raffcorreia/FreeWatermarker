@@ -23,7 +23,7 @@ namespace FreeWatermarker
 
             WaterMark = new clsWaterMarker();
             images = new List<clsImageItem>();
-            WaterMarkHasTransparentColor = false;
+            WaterMarkHasTransparentColor = true;
             checkBox5.Checked = true;
             HasImageWaterMark = true;
 
@@ -37,7 +37,7 @@ namespace FreeWatermarker
             //
 
             loadImages(new string[] { "..\\..\\..\\..\\1.jpg", "..\\..\\..\\..\\2.jpg", "..\\..\\..\\..\\3.jpg", "..\\..\\..\\..\\4.jpg" });
-            LoadWaterMark("..\\..\\Images\\watermark.bmp");
+            LoadWaterMark("..\\..\\Images\\watermark.png");
 
             this.pbWatermark.AllowDrop = true;
             this.pbWatermark.DragEnter += new System.Windows.Forms.DragEventHandler(this.pbWatermark_DragEnter);
@@ -90,12 +90,14 @@ namespace FreeWatermarker
         {
             try
             {
+                HasImageWaterMark = true;
                 Bitmap img  = new Bitmap(FileName);
                 CreateOrUpdateImageWaterMark(img);
-                pbWatermark.Image = imgWM.ImgWaterMark;
+                pbWatermark.Image = img;
             }
             catch (Exception)
             {
+                HasImageWaterMark = false;
                 MessageBox.Show("There is a problem reading the watermark image: " + FileName, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -146,7 +148,7 @@ namespace FreeWatermarker
 
         private void btnSaveImages_Click(object sender, EventArgs e)
         {
-            frmSave f = new frmSave(ref images, WaterMark);
+            frmSave f = new frmSave(ref images);//, WaterMark);
             f.ShowDialog();
             f.Dispose();
         }
@@ -243,7 +245,11 @@ namespace FreeWatermarker
             {
                 pbImage.Image = null;
             }
-            else if (imgWM != null)
+            else if (imgWM == null) 
+            {
+                pbImage.Image = images[index].Image;
+            }
+            else
             {
                 if (images[index].WaterMarks.Count <= 0)
                 {
@@ -370,31 +376,24 @@ namespace FreeWatermarker
                 {
                     CheckBox ck = (CheckBox)obj;
                     ck.Checked = ck == (CheckBox)sender;
-                    if (ck.Checked)
+                    if (imgWM != null)
                     {
-                        imgWM.Layout = (WaterMarkLayout)(int.Parse(((CheckBox)sender).Tag.ToString()));
-                        lblColumns.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
-                        lblRows.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
-                        nudColumns.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
-                        nudRows.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
+                        if (ck.Checked)
+                        {
+                            imgWM.Layout = (WaterMarkLayout)(int.Parse(((CheckBox)sender).Tag.ToString()));
+                            lblColumns.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
+                            lblRows.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
+                            nudColumns.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
+                            nudRows.Enabled = imgWM.Layout == WaterMarkLayout.Repeat;
 
-                        CreateOrUpdateImageWaterMark();
+                            CreateOrUpdateImageWaterMark();
+                        }
                     }
                 }
             }
         }
 
-        private void nudTransparency_ValueChanged(object sender, EventArgs e)
-        {
-            CreateOrUpdateImageWaterMark();
-        }
-
-        private void nudOffSetX_ValueChanged(object sender, EventArgs e)
-        {
-            CreateOrUpdateImageWaterMark();
-        }
-
-        private void nudOffSetY_ValueChanged(object sender, EventArgs e)
+        private void nud_ValueChanged(object sender, EventArgs e)
         {
             CreateOrUpdateImageWaterMark();
         }
@@ -408,8 +407,13 @@ namespace FreeWatermarker
 
         private void btnRemoveImageWaterMark_Click(object sender, EventArgs e)
         {
+            HasImageWaterMark = false;
+            panelWMImage.Enabled = false;
             imgWM = null;
             pbWatermark.Image = null;
+            btnNew.Enabled = true;
+            btnApply.Enabled = false;
+            btnApplyAll.Enabled = false;
             SelectImageFromGrid();
         }
 
@@ -426,6 +430,7 @@ namespace FreeWatermarker
                 images[index].WaterMarks[0] = imgWM.Clone();
             }
             images[index].Image = WaterMark.CreateAndInsertWaterMark(images[index]);
+            Applied();
         }
 
         private void btnApplyAll_Click(object sender, EventArgs e)
@@ -444,6 +449,24 @@ namespace FreeWatermarker
             }
             clsBatchWaterMarker WMBatch = new clsBatchWaterMarker(ref images);
             WMBatch.WaterMark();
+            Applied();
+        }
+
+        private void Applied()
+        {
+            panelWMImage.Enabled = false;
+            btnNew.Enabled = true;
+            btnApply.Enabled = false;
+            btnApplyAll.Enabled = false;
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            panelWMImage.Enabled = true;
+            btnNew.Enabled = false;
+            btnApply.Enabled = true;
+            btnApplyAll.Enabled = true;
+            CreateOrUpdateImageWaterMark();
         }
     }
 }

@@ -12,14 +12,12 @@ namespace FreeWatermarker
 {
     public partial class frmSave : Form
     {
-        public clsWaterMarker WaterMark;
         public List<clsImageItem> images;
 
-        public frmSave(ref List<clsImageItem> imageList, clsWaterMarker WMark)
+        public frmSave(ref List<clsImageItem> imageList)
         {
             InitializeComponent();
 
-            WaterMark = WMark;
             images = imageList;
 
             if (images == null)

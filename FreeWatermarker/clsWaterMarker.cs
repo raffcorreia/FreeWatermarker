@@ -204,7 +204,7 @@ namespace FreeWatermarker
 
             if (WM.Layout == WaterMarkLayout.Repeat)
             {
-                DrawWaterMarkRepetition(ref WM, NewWMSize);
+                DrawWaterMarkRepetition(ref WM, NewWMSize, imgAttrib);
             }
 
             grPiece.DrawImage(
@@ -223,7 +223,7 @@ namespace FreeWatermarker
             WM.ImgWaterMark = imgPiece;
         }
 
-        private void DrawWaterMarkRepetition(ref clsImageWaterMark WM, Size NewWMSize)
+        private void DrawWaterMarkRepetition(ref clsImageWaterMark WM, Size NewWMSize, ImageAttributes imgAttrib)
         {
             Bitmap img = new Bitmap(NewWMSize.Width, NewWMSize.Height);
             Size aux = new Size();
@@ -265,7 +265,8 @@ namespace FreeWatermarker
                         0,
                         WM.ImgWaterMark.Width,
                         WM.ImgWaterMark.Height,
-                        GraphicsUnit.Pixel
+                        GraphicsUnit.Pixel,
+                        imgAttrib
                     );
 
                     posY += gap.Height + aux.Height;

@@ -63,6 +63,16 @@ namespace FreeWatermarker.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddWM22x2 {
+            get {
+                object obj = ResourceManager.GetObject("AddWM22x2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cancel32x32 {
             get {
                 object obj = ResourceManager.GetObject("Cancel32x32", resourceCulture);
