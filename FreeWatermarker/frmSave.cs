@@ -28,21 +28,6 @@ namespace FreeWatermarker
             {
                 impossibleToSave("There is no images to save!");
             }
-            else
-            {
-                bool applied = true;
-                int x = 0;
-                while (x < images.Count && images[x].WaterMarkerApplied == false)
-                {
-                    applied = images[x].WaterMarkerApplied;
-                    x++;
-                }
-                if (!applied)
-                {
-                    impossibleToSave("You never applied your WaterMarks changes. You need to apply before save!");
-                }
-            }
-
         }
 
         private void impossibleToSave(string msg)
@@ -120,10 +105,11 @@ namespace FreeWatermarker
 
         private int SaveFiles(string folder, string seqName)
         {
+            clsWaterMarker WaterMarker = new clsWaterMarker();
             string fileName;
             int count = 1;
             
-            foreach (clsImageItem item in images)
+            foreach (clsImageItem iten in images)
             {
                 if (folder != "")
                 {
@@ -135,15 +121,15 @@ namespace FreeWatermarker
                 }
                 if (seqName != "")
                 {
-                    fileName = seqName + "_" + count.ToString() + item.FileExtension();
+                    fileName = seqName + "_" + count.ToString() + iten.FileExtension();
                 }
                 else if(folder == "")
                 {
-                    fileName = item.Url;
+                    fileName = iten.Url;
                 }
                 else
                 {
-                    fileName = item.FileName();
+                    fileName = iten.FileName();
                 }
                 try
                 {
@@ -151,8 +137,7 @@ namespace FreeWatermarker
                     {
                         File.Delete(folder + fileName);
                     }
-                    Bitmap teste = new Bitmap(item.Image);
-                    teste.Save(folder + fileName);
+                    WaterMarker.CreateAndInsertWaterMark(iten).Save(folder + fileName);
                 }
                 catch (Exception)
                 {

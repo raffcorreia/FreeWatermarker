@@ -31,13 +31,6 @@ namespace FreeWatermarker
             get { return _WaterMarks; }
             set { _WaterMarks = value; }
         }
-
-        private bool _WaterMarkerApplied;
-        public bool WaterMarkerApplied
-        {
-            get { return _WaterMarkerApplied; }
-            set { _WaterMarkerApplied = value; }
-        }
             
         public clsImageItem(string url)
         {
