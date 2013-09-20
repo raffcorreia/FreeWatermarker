@@ -1,7 +1,9 @@
-﻿	
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeWatermarker", "FreeWatermarker\FreeWatermarker.csproj", "{15309C6A-6626-4B33-908E-4A14B7E838F5}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FreeWatermarkerSetup", "FreeWatermarkerSetup\FreeWatermarkerSetup.vdproj", "{2885C5E0-1BAA-44FF-A7B4-DD4EF789829F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,8 @@ Global
 		{15309C6A-6626-4B33-908E-4A14B7E838F5}.Debug|x86.Build.0 = Debug|x86
 		{15309C6A-6626-4B33-908E-4A14B7E838F5}.Release|x86.ActiveCfg = Release|x86
 		{15309C6A-6626-4B33-908E-4A14B7E838F5}.Release|x86.Build.0 = Release|x86
+		{2885C5E0-1BAA-44FF-A7B4-DD4EF789829F}.Debug|x86.ActiveCfg = Debug
+		{2885C5E0-1BAA-44FF-A7B4-DD4EF789829F}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -34,8 +34,8 @@ namespace FreeWatermarker
             tabPage2.ImageIndex = 1;
             //
 
-            loadImages(new string[] { "..\\..\\..\\..\\1.jpg", "..\\..\\..\\..\\2.jpg", "..\\..\\..\\..\\3.jpg", "..\\..\\..\\..\\4.jpg" });
-            LoadWaterMark("..\\..\\Images\\watermark.png");
+            //loadImages(new string[] { "..\\..\\..\\..\\1.jpg", "..\\..\\..\\..\\2.jpg", "..\\..\\..\\..\\3.jpg", "..\\..\\..\\..\\4.jpg" });
+            //LoadWaterMark("..\\..\\Images\\watermark.png");
 
             this.pbWatermark.AllowDrop = true;
             this.pbWatermark.DragEnter += new System.Windows.Forms.DragEventHandler(this.pbWatermark_DragEnter);
