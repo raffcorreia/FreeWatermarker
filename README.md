@@ -10,3 +10,8 @@ This is the Free Water Marker pre-release. In this version you will find a usefu
 In this version:
 - Create an image background in a short Bach of images (totally dependent of the machine memory)
 - Some functionalities to create the image watermark
+
+
+## Downloading ##
+
+The downloadable Free Watermarker releases live at [http://freewatermarker.rafaelcorreia.com/doku.php?id=download](http://freewatermarker.rafaelcorreia.com/doku.php?id=download).
