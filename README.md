@@ -1,4 +1,4 @@
-![FreeWatermarker](freewatermarker.rafaelcorreia.com)
+[FreeWatermarker](http://freewatermarker.rafaelcorreia.com)
 ===============
 
 
